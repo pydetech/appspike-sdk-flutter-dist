@@ -1,0 +1,26 @@
+# Dart / Flutter
+.dart_tool/
+.packages
+build/
+pubspec.lock
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Example app
+example/.dart_tool/
+example/build/
+example/.flutter-plugins
+example/.flutter-plugins-dependencies
+example/ios/Pods/
+example/ios/.symlinks/
+example/android/.gradle/
+example/android/local.properties
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# macOS
+.DS_Store
+*.hprof

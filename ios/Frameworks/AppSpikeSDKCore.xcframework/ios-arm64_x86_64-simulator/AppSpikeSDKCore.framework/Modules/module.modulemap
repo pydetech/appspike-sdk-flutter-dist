@@ -1,0 +1,4 @@
+framework module AppSpikeSDKCore {
+    header "AppSpikeSDKCore-Swift.h"
+    requires objc
+}

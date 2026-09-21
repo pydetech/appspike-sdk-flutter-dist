@@ -1,0 +1,65 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.1.2 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
+// swift-module-flags: -target x86_64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -module-name AppSpikeSDKCore -package-name appspike
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1.2
+import Foundation
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_hasMissingDesignatedInitializers final public class AppSpike : @unchecked Swift.Sendable {
+  public static let shared: AppSpikeSDKCore.AppSpike
+  final public func initialize(apiKey: Swift.String, modules: [any AppSpikeSDKCore.AppSpikeModule] = [], callback: @escaping @Sendable (AppSpikeSDKCore.InitResult) -> Swift.Void)
+  final public func deviceContext() -> AppSpikeSDKCore.SessionDeviceContext
+  @objc deinit
+}
+public protocol AppSpikeModule : AnyObject, Swift.Sendable {
+  func onSessionReady(session: AppSpikeSDKCore.AppSpikeSession)
+}
+@_hasMissingDesignatedInitializers final public class AppSpikeSession : @unchecked Swift.Sendable {
+  final public let resolveRemoteConfigUrl: @Sendable () async throws -> AppSpikeSDKCore.RemoteConfigUrlResolution
+  final public let deviceContext: @Sendable () -> AppSpikeSDKCore.SessionDeviceContext
+  final public let configUrl: Swift.String?
+  @objc deinit
+}
+public enum InitResult : Swift.Sendable {
+  case success
+  case error(message: Swift.String)
+}
+public enum ApiResult<T> : Swift.Sendable where T : Swift.Sendable {
+  case success(T)
+  case unauthorized
+  case error(any Swift.Error)
+  public var isSuccess: Swift.Bool {
+    get
+  }
+  public var isUnauthorized: Swift.Bool {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers final public class TokenStorage : @unchecked Swift.Sendable {
+  final public func getAccessToken() -> Swift.String?
+  final public func getRefreshToken() -> Swift.String?
+  @objc deinit
+}
+public struct RemoteConfigUrlResolution : Swift.Sendable {
+  public let remoteConfigUrl: Swift.String?
+  public let serverTimeIso: Swift.String?
+  public init(remoteConfigUrl: Swift.String?, serverTimeIso: Swift.String?)
+}
+public struct RemoteConfigUrlResolutionError : Swift.Error {
+  public let message: Swift.String
+  public let underlyingError: (any Swift.Error)?
+  public init(message: Swift.String, underlyingError: (any Swift.Error)? = nil)
+}
+public struct SessionDeviceContext : Swift.Sendable {
+  public let deviceId: Swift.String?
+  public let appId: Swift.String?
+  public let platform: Swift.String
+  public let appVersion: Swift.String?
+  public let appBuild: Swift.String?
+  public let country: Swift.String?
+  public let language: Swift.String?
+  public init(deviceId: Swift.String?, appId: Swift.String?, platform: Swift.String, appVersion: Swift.String?, appBuild: Swift.String?, country: Swift.String?, language: Swift.String?)
+}

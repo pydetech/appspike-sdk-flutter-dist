@@ -1,0 +1,243 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.1.2 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
+// swift-module-flags: -target x86_64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -module-name AppSpikeSDKRemoteConfig -package-name appspike
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1.2
+import AppSpikeSDKCore
+import Combine
+import CryptoKit
+import Foundation
+import Swift
+import SwiftUI
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+import os
+extension AppSpikeSDKCore.AppSpike {
+  public static func remoteConfig() -> AppSpikeSDKRemoteConfig.AppSpikeRemoteConfig
+}
+@_hasMissingDesignatedInitializers final public class AppSpikeRemoteConfig : AppSpikeSDKCore.AppSpikeModule, @unchecked Swift.Sendable {
+  public static let shared: AppSpikeSDKRemoteConfig.AppSpikeRemoteConfig
+  final public func onSessionReady(session: AppSpikeSDKCore.AppSpikeSession)
+  final public var lastFetchTime: Foundation.Date? {
+    get
+  }
+  final public var lastFetchStatus: AppSpikeSDKRemoteConfig.RemoteConfigFetchStatus {
+    get
+  }
+  final public var configSettings: AppSpikeSDKRemoteConfig.RemoteConfigSettings {
+    get
+    set
+  }
+  final public func setDefaults(_ defaults: [Swift.String : Any])
+  final public func setDefaults(fromPlist fileName: Swift.String)
+  final public func setCustomSignals(_ customSignals: AppSpikeSDKRemoteConfig.CustomSignals) async throws
+  final public func setCustomSignals(_ signals: [Swift.String : AppSpikeSDKRemoteConfig.CustomSignalValue?]) async throws
+  final public func fetch() async throws
+  final public func fetch(withExpirationDuration expirationDuration: Foundation.TimeInterval) async throws
+  final public func activate() async -> Swift.Bool
+  final public func fetchAndActivate() async throws -> AppSpikeSDKRemoteConfig.RemoteConfigFetchAndActivateStatus
+  final public func configValue(forKey key: Swift.String) -> AppSpikeSDKRemoteConfig.RemoteConfigValue
+  final public subscript(key: Swift.String) -> AppSpikeSDKRemoteConfig.RemoteConfigValue {
+    get
+  }
+  final public subscript<T>(decodedValue key: Swift.String) -> T? where T : Swift.Decodable {
+    get
+  }
+  final public subscript(jsonValue key: Swift.String) -> [Swift.String : Swift.AnyHashable]? {
+    get
+  }
+  final public func configValue(forKey key: Swift.String, source: AppSpikeSDKRemoteConfig.RemoteConfigSource) -> AppSpikeSDKRemoteConfig.RemoteConfigValue
+  final public func getString(_ key: Swift.String) -> Swift.String
+  final public func getBoolean(_ key: Swift.String) -> Swift.Bool
+  final public func getLong(_ key: Swift.String) -> Swift.Int64
+  final public func getDouble(_ key: Swift.String) -> Swift.Double
+  final public func allKeys(from source: AppSpikeSDKRemoteConfig.RemoteConfigSource) -> [Swift.String]
+  final public func allConfigValues() -> [Swift.String : AppSpikeSDKRemoteConfig.RemoteConfigValue]
+  final public func keys(withPrefix prefix: Swift.String?) -> Swift.Set<Swift.String>
+  final public func defaultValue(forKey key: Swift.String) -> AppSpikeSDKRemoteConfig.RemoteConfigValue?
+  @discardableResult
+  final public func addOnConfigUpdateListener(remoteConfigUpdateCompletion listener: @escaping @Sendable (AppSpikeSDKRemoteConfig.RemoteConfigUpdate?, (any Swift.Error)?) -> Swift.Void) -> AppSpikeSDKRemoteConfig.ConfigUpdateListenerRegistration
+  final public func reset()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class ConfigUpdateListenerRegistration : Swift.Sendable {
+  final public func remove()
+  @objc deinit
+}
+public struct CustomSignalValue : Swift.Sendable {
+  public static func string(_ value: Swift.String) -> AppSpikeSDKRemoteConfig.CustomSignalValue
+  public static func integer(_ value: Swift.Int64) -> AppSpikeSDKRemoteConfig.CustomSignalValue
+  public static func double(_ value: Swift.Double) -> AppSpikeSDKRemoteConfig.CustomSignalValue
+}
+extension AppSpikeSDKRemoteConfig.CustomSignalValue : Swift.ExpressibleByStringInterpolation {
+  public init(stringLiteral value: Swift.String)
+  public typealias ExtendedGraphemeClusterLiteralType = Swift.String
+  public typealias StringInterpolation = Swift.DefaultStringInterpolation
+  public typealias StringLiteralType = Swift.String
+  public typealias UnicodeScalarLiteralType = Swift.String
+}
+extension AppSpikeSDKRemoteConfig.CustomSignalValue : Swift.ExpressibleByIntegerLiteral {
+  public init(integerLiteral value: Swift.Int)
+  public typealias IntegerLiteralType = Swift.Int
+}
+extension AppSpikeSDKRemoteConfig.CustomSignalValue : Swift.ExpressibleByFloatLiteral {
+  public init(floatLiteral value: Swift.Double)
+  public typealias FloatLiteralType = Swift.Double
+}
+public struct CustomSignals : Swift.Sendable {
+  final public class Builder {
+    public init()
+    @discardableResult
+    final public func put(key: Swift.String, value: Swift.String?) -> AppSpikeSDKRemoteConfig.CustomSignals.Builder
+    @discardableResult
+    final public func put(key: Swift.String, value: Swift.Int64) -> AppSpikeSDKRemoteConfig.CustomSignals.Builder
+    @discardableResult
+    final public func put(key: Swift.String, value: Swift.Int) -> AppSpikeSDKRemoteConfig.CustomSignals.Builder
+    @discardableResult
+    final public func put(key: Swift.String, value: Swift.Double) -> AppSpikeSDKRemoteConfig.CustomSignals.Builder
+    final public func build() -> AppSpikeSDKRemoteConfig.CustomSignals
+    @objc deinit
+  }
+}
+public let RemoteConfigThrottledEndTimeInSecondsKey: Swift.String
+public class RemoteConfigFetchError : Swift.Error, Foundation.CustomNSError, @unchecked Swift.Sendable {
+  final public let message: Swift.String
+  final public let cause: (any Swift.Error)?
+  public static var errorDomain: Swift.String {
+    get
+  }
+  public var errorCode: Swift.Int {
+    get
+  }
+  public var errorUserInfo: [Swift.String : Any] {
+    get
+  }
+  public init(_ message: Swift.String, cause: (any Swift.Error)? = nil)
+  @objc deinit
+}
+extension AppSpikeSDKRemoteConfig.RemoteConfigFetchError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+final public class RemoteConfigThrottledError : AppSpikeSDKRemoteConfig.RemoteConfigFetchError {
+  final public let throttleEndTimeInterval: Foundation.TimeInterval
+  final public var throttleEndDate: Foundation.Date {
+    get
+  }
+  override final public var errorCode: Swift.Int {
+    get
+  }
+  override final public var errorUserInfo: [Swift.String : Any] {
+    get
+  }
+  public init(_ message: Swift.String, throttleEndTimeInterval: Foundation.TimeInterval)
+  @objc deinit
+}
+public enum RemoteConfigFetchAndActivateStatus : Swift.Sendable {
+  case successFetchedFromRemote
+  case successUsingPreFetchedData
+  case error
+  public static func == (a: AppSpikeSDKRemoteConfig.RemoteConfigFetchAndActivateStatus, b: AppSpikeSDKRemoteConfig.RemoteConfigFetchAndActivateStatus) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum RemoteConfigFetchStatus : Swift.String, Swift.Sendable {
+  case success
+  case failure
+  case throttled
+  case noFetchYet
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct RemoteConfigInfo : Swift.Sendable {
+  public let lastFetchStatus: AppSpikeSDKRemoteConfig.RemoteConfigFetchStatus
+  public let lastFetchTime: Foundation.Date?
+  public let configSettings: AppSpikeSDKRemoteConfig.RemoteConfigSettings
+}
+@propertyWrapper public struct RemoteConfigProperty<T> : SwiftUICore.DynamicProperty where T : Swift.Decodable {
+  public let key: Swift.String
+  @_Concurrency.MainActor public var wrappedValue: T {
+    get
+  }
+  public init(key: Swift.String, fallback: T)
+}
+public struct RemoteConfigSettings : Swift.Sendable {
+  public var minimumFetchInterval: Foundation.TimeInterval
+  public var fetchTimeout: Foundation.TimeInterval
+  public init(minimumFetchInterval: Foundation.TimeInterval = 43_200, fetchTimeout: Foundation.TimeInterval = 60)
+}
+public enum RemoteConfigSource : Swift.Sendable {
+  case remote
+  case `default`
+  case `static`
+  public static func == (a: AppSpikeSDKRemoteConfig.RemoteConfigSource, b: AppSpikeSDKRemoteConfig.RemoteConfigSource) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct RemoteConfigUpdate : Swift.Sendable {
+  public let updatedKeys: Swift.Set<Swift.String>
+}
+extension AppSpikeSDKRemoteConfig.AppSpikeRemoteConfig {
+  final public var configUpdates: AppSpikeSDKRemoteConfig.AppSpikeRemoteConfig.RemoteConfigUpdateSequence {
+    get
+  }
+  public struct RemoteConfigUpdateSequence : _Concurrency.AsyncSequence, Swift.Sendable {
+    public typealias Element = AppSpikeSDKRemoteConfig.RemoteConfigUpdate
+    public typealias Failure = Swift.Error
+    public typealias AsyncIterator = AppSpikeSDKRemoteConfig.AppSpikeRemoteConfig.RemoteConfigUpdateSequence.Iterator
+    public init(_ remoteConfig: AppSpikeSDKRemoteConfig.AppSpikeRemoteConfig)
+    public func makeAsyncIterator() -> AppSpikeSDKRemoteConfig.AppSpikeRemoteConfig.RemoteConfigUpdateSequence.Iterator
+    public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      public typealias Element = AppSpikeSDKRemoteConfig.RemoteConfigUpdate
+      public mutating func next() async throws -> AppSpikeSDKRemoteConfig.AppSpikeRemoteConfig.RemoteConfigUpdateSequence.Iterator.Element?
+      @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
+      @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
+    }
+  }
+}
+@available(*, unavailable)
+extension AppSpikeSDKRemoteConfig.AppSpikeRemoteConfig.RemoteConfigUpdateSequence.Iterator : Swift.Sendable {
+}
+@_hasMissingDesignatedInitializers final public class RemoteConfigValue : @unchecked Swift.Sendable {
+  final public let source: AppSpikeSDKRemoteConfig.RemoteConfigSource
+  final public var stringValue: Swift.String {
+    get
+  }
+  final public var numberValue: Foundation.NSNumber {
+    get
+  }
+  final public var boolValue: Swift.Bool {
+    get
+  }
+  final public var dataValue: Foundation.Data {
+    get
+  }
+  final public var jsonValue: Any? {
+    get
+  }
+  @objc deinit
+}
+public enum RemoteConfigValueCodableError : Swift.Error, Foundation.LocalizedError {
+  case unsupportedType(Swift.String)
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+extension AppSpikeSDKRemoteConfig.RemoteConfigValue {
+  final public func decoded<Value>(asType: Value.Type = Value.self) throws -> Value where Value : Swift.Decodable
+}
+extension AppSpikeSDKRemoteConfig.RemoteConfigFetchAndActivateStatus : Swift.Equatable {}
+extension AppSpikeSDKRemoteConfig.RemoteConfigFetchAndActivateStatus : Swift.Hashable {}
+extension AppSpikeSDKRemoteConfig.RemoteConfigFetchStatus : Swift.Equatable {}
+extension AppSpikeSDKRemoteConfig.RemoteConfigFetchStatus : Swift.Hashable {}
+extension AppSpikeSDKRemoteConfig.RemoteConfigFetchStatus : Swift.RawRepresentable {}
+extension AppSpikeSDKRemoteConfig.RemoteConfigSource : Swift.Equatable {}
+extension AppSpikeSDKRemoteConfig.RemoteConfigSource : Swift.Hashable {}

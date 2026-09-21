@@ -1,0 +1,19 @@
+name: appspike_remote_config_example
+description: Sample app for the AppSpike Remote Config Flutter SDK.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  appspike_remote_config:
+    path: ../
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true

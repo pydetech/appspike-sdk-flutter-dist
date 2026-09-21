@@ -1,0 +1,71 @@
+group = "dev.appspike.appspike_remote_config"
+version = "1.4.5"
+
+buildscript {
+    ext.kotlin_version = "2.3.20"
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:8.9.1")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        // The vendored, obfuscated AppSpike AARs ship inside the plugin,
+        // so consumers need no authenticated Maven repo.
+        flatDir { dirs "${project(':appspike_remote_config').projectDir}/libs" }
+    }
+}
+
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+
+android {
+    namespace = "dev.appspike.appspike_remote_config"
+    compileSdk = 36
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    sourceSets {
+        main.java.srcDirs += "src/main/kotlin"
+    }
+
+    defaultConfig {
+        minSdk = 24
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
+    }
+}
+
+dependencies {
+    // Vendored AppSpike SDK (obfuscated) — the fetch/evaluation engine.
+    implementation(name: "remote-config-android-1.4.5", ext: "aar")
+    implementation(name: "sdk-core-android-1.4.5", ext: "aar")
+
+    // Transitive dependencies of the vendored AARs (from their POMs).
+    // flatDir carries no POM, so these are declared explicitly and
+    // resolve from Maven Central.
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.10.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1")
+    implementation("io.ktor:ktor-client-core:3.3.0")
+    implementation("io.ktor:ktor-client-okhttp:3.3.0")
+    implementation("io.ktor:ktor-client-content-negotiation:3.3.0")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:3.3.0")
+    implementation("com.russhwolf:multiplatform-settings:1.3.0")
+}

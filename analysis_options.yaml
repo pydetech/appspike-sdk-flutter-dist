@@ -1,0 +1,18 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    # Build tooling, resolved against its own throwaway package at run time.
+    - scripts/**
+  language:
+    strict-casts: true
+    strict-inference: true
+
+linter:
+  rules:
+    - unawaited_futures
+    - prefer_final_locals
+    - directives_ordering

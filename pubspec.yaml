@@ -1,0 +1,31 @@
+name: appspike_remote_config
+description: >-
+  AppSpike Remote Config for Flutter — a Firebase Remote Config-compatible
+  feature-flag and remote configuration SDK. Fetching and on-device
+  condition evaluation run in the native AppSpike SDK (iOS + Android).
+version: 1.4.5
+publish_to: none # distributed via the public dist repo (git dependency), never pub.dev
+homepage: https://github.com/pydetech/appspike-sdk-flutter-dist
+repository: https://github.com/pydetech/appspike-sdk-flutter-dist
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+  flutter: ">=3.22.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: dev.appspike.appspike_remote_config
+        pluginClass: AppspikeRemoteConfigPlugin
+      ios:
+        pluginClass: AppspikeRemoteConfigPlugin

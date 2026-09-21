@@ -1,0 +1,4 @@
+framework module AppSpikeSDKRemoteConfig {
+    header "AppSpikeSDKRemoteConfig-Swift.h"
+    requires objc
+}
